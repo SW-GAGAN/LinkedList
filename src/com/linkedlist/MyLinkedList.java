@@ -45,7 +45,7 @@ public class MyLinkedList {
     }
     /* @Description-  delete the first element in the linked list of sequence 56->30->70 */
 
-    public INode pop(){
+    public INode pop() {
         INode tempNode = this.head;
         this.head = this.head.getNext();
         return tempNode;
@@ -53,9 +53,9 @@ public class MyLinkedList {
 
     /* @Description-  delete the last element in the linked list of sequence 56->30->70 */
 
-    public INode popLast(){
+    public INode popLast() {
         INode tempNode = head;
-        while (!tempNode.getNext().equals((tail))){
+        while (!tempNode.getNext().equals((tail))) {
             tempNode = tempNode.getNext();
         }
         this.tail = tempNode;
@@ -64,15 +64,52 @@ public class MyLinkedList {
     }
     /* @Description- to search linked list to find Node with value 30 */
 
-    public boolean serchElement(INode serchNode){
+    public boolean serchElement(INode serchNode) {
         INode tempNode = this.head;
-        while (tempNode != null){
-            if (tempNode.getKey().equals(serchNode.getKey())){
+        while (tempNode != null) {
+            if (tempNode.getKey().equals(serchNode.getKey())) {
                 return true;
             }
             tempNode = tempNode.getNext();
         }
         return false;
+    }
+
+    public Integer size() {
+        Integer size = 0;
+        INode tempNode = this.head;
+        while (tempNode != null) {
+            size++;
+            tempNode = tempNode.getNext();
+        }
+        return size;
+    }
+    /* to search and insert element. */
+
+    public boolean serchAndInsertElement(INode serchNode, INode insertNode) {
+        INode tempNode = this.head;
+        while (tempNode != null) {
+            if (tempNode.getKey().equals(serchNode.getKey())) {
+                insert(tempNode, insertNode);
+                return true;
+            }
+            tempNode = tempNode.getNext();
+        }
+        return false;
+    }
+
+    /* @Description- To search the element and delete  the element*/
+
+    public void searchAndDelete(INode searchNode) {
+        if (serchElement(searchNode)) {
+            System.out.println("Linked List size before deleting element : " + size());
+            INode nextNode = searchNode.getNext();
+            INode tempNode = nextNode.getNext();
+            if (nextNode != tail) {
+                searchNode.setNext(tempNode);
+                System.out.println("Linked List size after deleting element : " + size());
+            }
+        }
     }
 
     public void printMyNodes() {
